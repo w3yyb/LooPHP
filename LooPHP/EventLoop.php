@@ -56,7 +56,6 @@ class LooPHP_EventLoop_NullSource implements LooPHP_EventSource
 			return FALSE;
 		
 		usleep( $timeout * 1000000 );
-		//usleep( $timeout * 1000 );
 		return TRUE;
 	}
 	

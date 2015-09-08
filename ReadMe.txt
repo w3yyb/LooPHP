@@ -1,11 +1,12 @@
 LooPHP -- 撸PHP
 =============
 
-LooPHP is an event loop (http://en.wikipedia.org/wiki/Event_loop) for PHP. It provides an abstract base for programming PHP using an event driven style of programming. It can handle up to ~150,000 events/second. Due to PHP's  single threaded nature and lacks a unifying method of polling sockets/streams/etc, the implementation of the event source is left up to the user.
+LooPHP是一个PHP事件循环程序 (http://en.wikipedia.org/wiki/Event_loop) .
+它为  PHP 使用事件驱动的编程风格提供抽象基类。LooPHP可以处理高达 150,000 ~ 事件/秒。由于 PHP 的单一线程的性质和缺乏一种统一方法的轮询socket/streams等，事件源码的实现留给大家去完成。
 
-Few things to keep in mind:
-	-Nothing should block, if you need to wait for something to happen, it should be scheduled using an event.
-	-Events can be cancelled via $loophp_event->cancel()
+注意:
+	-什么都不应阻塞，如果你需要等待某事发生，应安排使用事件。
+	-事件能通过 $loophp_event->cancel() 取消运行.
 
 要求:
 	-PHP 5.3+

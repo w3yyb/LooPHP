@@ -1,9 +1,9 @@
 <?php
-
+//事件堆
 class LooPHP_EventLoop_EventHeap extends SplMinHeap
 {
 
-	/* Event management */
+	/* 比较两个事件时间大小 */
 		
 	function compare( $event1, $event2 )
 	{
@@ -20,7 +20,8 @@ class LooPHP_EventLoop_EventHeap extends SplMinHeap
 class LooPHP_EventLoop_Event
 {
 	
-	/* Time is left public to decrease overhead, don't alter $time once an event is inserted into EventHeap */
+    /* 
+     * time为public 以减少开销，不要修改 $time 一旦事件插入到 EventHeap */
 	public $time;
 	public $callback;
 	
@@ -31,7 +32,8 @@ class LooPHP_EventLoop_Event
 			: microtime( TRUE ) + $timeout;
 		$this->callback = $callback;
 	}
-	
+
+//取消事件    
 	function cancel()
 	{
 		if( $this->isCancelled() )
@@ -71,12 +73,12 @@ class LooPHP_EventLoop
 	function __construct( LooPHP_EventSource $event_source = NULL )
 	{
 		$this->_event_heap = new LooPHP_EventLoop_EventHeap();
-		$this->_event_queue = new SplQueue();
+		$this->_event_queue = new SplQueue();//双向链表实现的队列
 		$this->_event_source = $event_source !== NULL
 			? $event_source
 			: new LooPHP_EventLoop_NullSource();
 	}
-	
+//添加事件 	
 	function addEvent( Closure $callback, $timeout = NULL )
 	{
 		$event = new LooPHP_EventLoop_Event( $callback, $timeout );
@@ -94,7 +96,7 @@ class LooPHP_EventLoop
 			while( ! $this->_event_queue->isEmpty() ) {
 				$current_event = $this->_event_queue->dequeue();
 				$callback = $current_event->callback;
-				if( $callback !== NULL ) //check if the event was cancelled
+				if( $callback !== NULL ) //检查事件是否取消
 					$callback( $this );
 			}
 			while( $this->_event_heap->valid() && $this->_event_queue->isEmpty() ) {
@@ -104,7 +106,7 @@ class LooPHP_EventLoop
 				}
 				$this->_event_heap->next();
 				$callback = $current_event->callback;
-				if( $callback !== NULL ) //check if the event was cancelled
+				if( $callback !== NULL ) //检查事件是否取消
 					$callback( $this );
 			}
 		} while( ! $this->_event_queue->isEmpty() );

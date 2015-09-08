@@ -1,5 +1,5 @@
 <?php
-
+//run as a daemon
 require( dirname( dirname( __FILE__ ) )."/LooPHP/Autoload.php" );
 LooPHP_Autoload::register();
 

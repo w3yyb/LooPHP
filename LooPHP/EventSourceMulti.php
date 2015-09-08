@@ -1,5 +1,5 @@
 <?php
-
+//需要在cli下运行`
 class LooPHP_EventSourceMulti implements LooPHP_EventSource
 {
 	

@@ -1,5 +1,5 @@
 <?php
-
+//自动加载
 class LooPHP_Autoload
 {
 

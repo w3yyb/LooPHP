@@ -10,4 +10,7 @@ LooPHP是一个PHP事件循环程序 (http://en.wikipedia.org/wiki/Event_loop) .
 
 要求:
 	-PHP 5.3+
+	
+TODO:
+	-异步非阻塞
  
